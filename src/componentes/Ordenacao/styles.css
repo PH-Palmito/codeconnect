@@ -1,0 +1,21 @@
+.container__ordenacao{
+    display: flex;
+    justify-content: center ;
+    gap: 24px;
+    margin: 1em;
+}
+
+.container__ordenacao button{
+
+    border: none;
+    font-size: 22px;
+    background-color: transparent;
+
+}
+.Recentes{
+    text-decoration: underline;
+    color: var(--verde-destaque);
+}
+.Relevancia{
+    color: var(--cinza-claro);
+}

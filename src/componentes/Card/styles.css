@@ -1,0 +1,95 @@
+
+.card {
+    color: var(--cinza-claro);
+    text-decoration: none;
+    background-color: var(--cinza-escuro);
+    border-radius: 8px;
+
+    width: 100%;
+
+    display: grid;
+}
+
+.card__imagem {
+    width: 100%;
+    height: 240px;
+    background-color: var(--cinza-claro);
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card__imagem img {
+    width: 90%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0px 16px 24px 0px #0000003D;
+}
+
+.card__conteudo {
+    padding: 16px;
+    height: 100%;
+}
+
+.card__link {
+    text-decoration: none;
+    color: var(--cinza-claro);
+}
+
+.conteudo__texto {
+    margin-bottom: 67px;
+}
+
+.conteudo__texto h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.conteudo__texto p {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 23px;
+}
+
+.conteudo__rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.conteudo__rodape ul {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+    align-items: baseline;
+}
+
+.conteudo__rodape div {
+    flex-grow: 0;
+}
+
+.conteudo__rodape ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+}
+
+.rodape__usuario {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rodape__usuario img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    object-fit: cover;
+}

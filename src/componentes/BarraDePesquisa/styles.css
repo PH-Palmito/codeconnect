@@ -1,0 +1,12 @@
+.barra-pesquisa{
+    width: 100%	;
+    background-color: var(--cinza-claro);
+    padding: .5em 1em .5em 3em;
+    height: 49px;
+    font-family: var(--fonte);
+    font-size: 22px;
+    background: var(--cinza-escuro) url('./assets/search.svg')no-repeat 32px;
+    border: none;
+    border-radius: 4px;
+
+}
