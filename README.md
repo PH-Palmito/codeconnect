@@ -48,7 +48,6 @@ O **CodeConnect** simula um blog de tecnologia, com cards de notícias sobre o u
 - Estrutura de pastas em projetos React
 - Deploy de aplicação React no GitHub Pages
 
----![Captura de tela 2025-04-07 102344](https://github.com/user-attachments/assets/71c3ce8e-03a8-4096-ab70-b36714b129e9)
 
 
 ## 📁 Como rodar localmente
