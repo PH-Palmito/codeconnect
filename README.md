@@ -35,8 +35,8 @@ O **CodeConnect** simula um blog de tecnologia, com cards de notícias sobre o u
 
 ## 📷 Screenshot
 
-<img src="https://github.com/user-attachments/assets/71c3ce8e-03a8-4096-ab70-b36714b129e9" alt="Print do CodeConnect" width="600"/>  
-![Captura de tela 2025-04-07 102344](https://github.com/user-attachments/assets/71c3ce8e-03a8-4096-ab70-b36714b129e9)
+<img src="https://github.com/user-attachments/assets/71c3ce8e-03a8-4096-ab70-b36714b129e9" alt="Print do CodeConnect" width="800"/>  
+
 
 ---
 
