@@ -17,6 +17,17 @@
   box-sizing: border-box;
 }
 body{
-  background-color: var(--grafite);
-  font-family: var(--fonte);
+
+
+
+    background: url('/src/assets/imagens/simbolo.png') left 3rem top no-repeat,
+    url('/src/assets/imagens/simbolo.png') right 3rem bottom no-repeat,
+    var(--grafite);
+    background-size: 22rem;
+
+
+    font-family: var(--fonte);
+
+
+
 }

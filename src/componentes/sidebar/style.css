@@ -27,9 +27,28 @@ aside{
     color:var(--branco);
 }
 .item__link-publicacao{
+font-size: 22px;
 border: 1px solid var(--verde-destaque);
 color: var(--verde-destaque);
 padding: 0.75em 1em;
 border-radius: 8px;
 text-decoration: none;
+all: 'unset';
+background-color: transparent;
+cursor: pointer;
+}
+.item__link_button{
+    background: none;
+    border: none;
+    padding-left: 2em ;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 22px;
+    gap: 10px;
+    color: var(--cinza-claro);
+    text-decoration: none;
 }

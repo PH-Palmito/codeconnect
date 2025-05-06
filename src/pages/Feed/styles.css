@@ -1,3 +1,11 @@
+.login-page {
+    background: url('/src/assets/imagens/simbolo.png') left 10rem top no-repeat,
+    url('/src/assets/imagens/simbolo.png') right 10rem bottom no-repeat,
+    var(--grafite);
+    background-size: 22.5rem;
+    
+}
+
 .container{
     width: 62vw;
     margin: 3.5em auto;
@@ -7,9 +15,16 @@
 .container div{
     flex-grow: 2;
 }
-.lista-cards{
+.lista-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr;
     gap: 24px;
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 900px) {
+    .lista-cards {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,4 +1,3 @@
-
 .card {
     color: var(--cinza-claro);
     text-decoration: none;
@@ -6,6 +5,7 @@
     border-radius: 8px;
 
     width: 100%;
+    height: 100%;
 
     display: grid;
 }
@@ -64,7 +64,7 @@
 
 .conteudo__rodape ul {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     list-style: none;
     align-items: baseline;
 }
@@ -84,6 +84,7 @@
 .rodape__usuario {
     display: flex;
     align-items: center;
+    justify-content: end;
     gap: 8px;
 }
 

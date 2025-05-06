@@ -1,0 +1,125 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+    background-color: var(--itens-background);
+    border-radius: 10px;
+  }
+
+  form div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  form div label,
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-color);
+  }
+
+  form div input,
+  textarea {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  form div input:focus,
+  textarea:focus {
+    border-color: var(--primary-color);
+  }
+
+  textarea {
+    height: 120px;
+    resize: vertical;
+  }
+
+  .lista-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .lista-tags li {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+  }
+
+  .lista-tags li button {
+    background-color: transparent;
+    border: none;
+    color: var(--background-color);
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .lista-tags li button:hover {
+    color: var(--primary-color);
+  }
+
+  .container-botoes {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .botao-descartar,
+  .botao-adicionar {
+    width: 48%;
+    padding: 12px;
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: var(--itens-background);
+    color: var(--primary-color);
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .botao-descartar {
+    background-color: var(--itens-background);
+  }
+
+  .botao-adicionar {
+    background-color: var(--itens-background);
+  }
+
+  .botao-descartar:hover,
+  .botao-adicionar:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border-color: var(--primary-color);
+  }
+
+  .botao-descartar::after,
+  .botao-adicionar::after {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-left: 8px;
+  }
+
+  .botao-descartar::after {
+    background-image: url("./img/trash.svg");
+    background-size: contain;
+  }
+
+  .botao-adicionar::after {
+    background-image: url("./img/upload.svg");
+    background-size: contain;
+  }
