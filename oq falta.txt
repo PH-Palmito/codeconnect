@@ -1,0 +1,7 @@
+1 tela de cadastro
+2 tela de perfil
+3 sobre nos
+4fazer o publicar funcionar
+5 adicionar icones no login
+6 favicon
+7 
