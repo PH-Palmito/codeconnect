@@ -4,8 +4,8 @@ import BarraDePesquisa from '../../componentes/BarraDePesquisa'
 import Card from '../../componentes/Card'
 import Filtro from '../../componentes/Filtro'
 import Ordenacao from '../../componentes/Ordenacao'
-import Sidebar from '../../componentes/Sidebar'
-import './styles.css' 
+import Sidebar from '../../componentes/sidebar'
+import './styles.css'
 
 export default function Feed() {
   const [dados, setDados] = useState([]);
