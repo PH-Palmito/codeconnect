@@ -1,18 +1,29 @@
 import { useNavigate } from "react-router-dom";
 
-import './Login.css';
+import { Link } from 'react-router-dom';
+
+
 import Titulo from '../../componentes/login/Titulo';
+
 import Subtitulo from '../../componentes/login/Subtitulo';
+
 import CampoDeDigitacao from '../../componentes/login/CampoDeDigitacao';
 import Botao from '../../componentes/login/Botao';
+
 import Checkbox from '../../componentes/login/Checkbox';
+
 import Texto from '../../componentes/login/Texto';
+
 import ItemRedesSociais from '../../componentes/login/ItemRedesSociais';
-import Link from '../../componentes/login/Link';
+
+
+
 
 import imagemLogin from '../../../src/assets/imagens/imagem-login.png';
+;
 
 import { useState } from 'react';
+import { ClipboardText } from "@phosphor-icons/react";
 
 export default function PaginaDeLogin() {
   const [email, setEmail] = useState('');
@@ -30,9 +41,12 @@ export default function PaginaDeLogin() {
     navigate("/codeconnect/feed");  // <-- Redirecionamento para o feed
   };
 
+
+
   return (
     <div className="login-page">
       <div className="container-login">
+
         <img src={imagemLogin} alt="mulher negra com computador" />
         <section>
           <form onSubmit={handleSubmit}>
@@ -72,7 +86,10 @@ export default function PaginaDeLogin() {
               <ItemRedesSociais link="https://www.google.com" nome="Google" />
             </ul>
             <Texto classe="container-links__texto">Ainda não tem conta?</Texto>
-            <Link>Crie seu cadastro!</Link>
+            <Link to="/codeconnect/cadastro" className="container-links__link">
+  Crie seu cadastro!<ClipboardText size={22}
+  weight="duotone" style={{ marginLeft: '6px', position: 'relative', top: '5px' }}/>
+</Link>
           </div>
         </section>
       </div>

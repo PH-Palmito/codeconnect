@@ -24,6 +24,7 @@ aside{
     text-decoration: none;
 }
 .item__link-ativo{
+    background-image: var(--verde-destaque);
     color:var(--branco);
 }
 .item__link-publicacao{
@@ -51,4 +52,54 @@ cursor: pointer;
     gap: 10px;
     color: var(--cinza-claro);
     text-decoration: none;
+}
+.item__link img {
+    filter: grayscale(100%) brightness(0,5);
+    transition: filter 0.3s;
+}
+
+.item__link-ativo img {
+    filter: none; /* mostra o ícone colorido na aba ativa */
+}
+@media (max-width: 768px) {
+    aside {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        padding: 0;
+        border-radius: 0;
+        background-color: var(--cinza-escuro);
+        z-index: 100;
+    }
+
+    .lista-sidebar {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0;
+        margin: 0;
+    }
+
+    .lista-sidebar li a,
+    .item__link_button {
+        font-size: 12px;
+        gap: 5px;
+        padding: 0;
+    }
+
+    .lista-sidebar li span {
+        display: none; /* Esconde o texto no mobile */
+    }
+
+    .item__link-publicacao {
+        display: none; /* Oculta o botão "Publicar" no rodapé */
+    }
+
+    .item__link img,
+    .item__link-ativo img {
+        width: 24px;
+        height: 24px;
+    }
 }
