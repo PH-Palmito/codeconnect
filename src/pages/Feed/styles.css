@@ -3,7 +3,7 @@
     url('/src/assets/imagens/simbolo.png') right 10rem bottom no-repeat,
     var(--grafite);
     background-size: 22.5rem;
-   
+
 }
 
 .container{
@@ -27,7 +27,16 @@
 
 /* Responsivo para telas pequenas */
 @media (max-width: 900px) {
-    .lista-cards {
-        grid-template-columns: 1fr;
-    }
+  .lista-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    width: 90vw;
+  }
+
+  .card {
+    width: 80%;
+     margin: 0 auto;
+  }
 }

@@ -1,47 +1,53 @@
-aside{
+/* Estilo padrão do aside (desktop) */
+aside {
     background-color: var(--cinza-escuro);
     padding: 2.5em 1em;
     width: 177px;
     border-radius: 8px;
 }
-.lista-sidebar{
+
+/* Lista vertical no desktop */
+.lista-sidebar {
     display: flex;
     flex-direction: column;
     gap: 2.5em;
     list-style-type: none;
     margin-top: 5em;
 }
-.lista-sidebar li a{
+
+.lista-sidebar li a {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 22px;
-    gap: 10px
+    gap: 10px;
 }
 
-.item__link{
+.item__link {
     color: var(--cinza-claro);
     text-decoration: none;
 }
-.item__link-ativo{
+
+.item__link-ativo {
     background-image: var(--verde-destaque);
-    color:var(--branco);
+    color: var(--branco);
 }
-.item__link-publicacao{
-font-size: 22px;
-border: 1px solid var(--verde-destaque);
-color: var(--verde-destaque);
-padding: 0.75em 1em;
-border-radius: 8px;
-text-decoration: none;
-all: 'unset';
-background-color: transparent;
-cursor: pointer;
+
+.item__link-publicacao {
+    font-size: 22px;
+    border: 1px solid var(--verde-destaque);
+    color: var(--verde-destaque);
+    padding: 0.75em 1em;
+    border-radius: 8px;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
 }
-.item__link_button{
+
+.item__link_button {
     background: none;
     border: none;
-    padding-left: 2em ;
+    padding-left: 2em;
     margin: 0;
     font: inherit;
     cursor: pointer;
@@ -53,15 +59,51 @@ cursor: pointer;
     color: var(--cinza-claro);
     text-decoration: none;
 }
+
 .item__link img {
-    filter: grayscale(100%) brightness(0,5);
+    filter: grayscale(100%) brightness(0.5);
     transition: filter 0.3s;
 }
 
 .item__link-ativo img {
-    filter: none; /* mostra o ícone colorido na aba ativa */
+    filter: none; /* Ícone colorido na aba ativa */
 }
+
+/* --- TOPO PARA MOBILE --- */
+.top-bar {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        background-color: var(--cinza-escuro);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 101;
+        border-bottom: 1px solid #333;
+    }
+
+    .logo-mobile {
+        height: 32px;
+    }
+
+    .top-bar__btn {
+        font-size: 14px;
+        padding: 0.5em 1em;
+        border: 1px solid var(--verde-destaque);
+        color: var(--verde-destaque);
+        border-radius: 6px;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    /* Sidebar vira barra inferior no mobile */
     aside {
         position: fixed;
         bottom: 0;
@@ -84,22 +126,48 @@ cursor: pointer;
 
     .lista-sidebar li a,
     .item__link_button {
-        font-size: 12px;
+
+        font-size: 14px;
         gap: 5px;
         padding: 0;
+        padding-top: 20px;
     }
 
     .lista-sidebar li span {
         display: none; /* Esconde o texto no mobile */
     }
 
-    .item__link-publicacao {
-        display: none; /* Oculta o botão "Publicar" no rodapé */
-    }
-
     .item__link img,
     .item__link-ativo img {
-        width: 24px;
-        height: 24px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .item__link-publicacao-wrapper {
+        display: none; /* Oculta botão de publicar do rodapé no mobile */
+    }
+
+    body {
+        padding-top: 60px; /* Espaço para o topo fixo no mobile */
+    }
+}
+/* Exibe logo no desktop */
+.logo-desktop {
+    display: block;
+}
+
+/* Esconde logo do topo no desktop */
+.logo-mobile {
+    display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .logo-desktop {
+        display: none;
+    }
+
+    .logo-mobile {
+        display: block;
     }
 }

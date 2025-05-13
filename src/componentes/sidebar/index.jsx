@@ -20,65 +20,90 @@ export default function Sidebar() {
     }
 
     return (
-        <aside>
-            <img src={Logo} alt="logo do code connect" />
-            <nav>
-                <ul className='lista-sidebar'>
-                    <li>
-                        <a
-                            onClick={() => navigate('/codeconnect/publish')}
-                            className='item__link-publicacao'
-                        >
-                            Publicar
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={() => navigate('/codeconnect/feed')}
-                            className={`item__link ${currentPath === '/codeconnect/feed' ? 'item__link-ativo' : ''}`}
-                        >
-                            <img
-                                src={currentPath === '/codeconnect/feed' ? FeedAtivo : Feed}
-                                alt='Feed'
-                            />
-                            <span>Feed</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={() => navigate('/codeconnect/perfil')}
-                            className={`item__link ${currentPath === '/codeconnect/perfil' ? 'item__link-ativo' : ''}`}
-                        >
-                            <img
-                                src={currentPath === '/codeconnect/perfil' ? AccountAtivo : Account}
-                                alt='Perfil'
-                            />
-                            <span>Perfil</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={() => navigate('/codeconnect/Sobre_nos')}
-                            className={`item__link ${currentPath === '/codeconnect/Sobre_nos' ? 'item__link-ativo' : ''}`}
-                        >
-                            <img
-                                src={currentPath === '/codeconnect/Sobre_nos' ? InfoAtivo : Info}
-                                alt='Sobre nós'
-                            />
-                            <span>Sobre nós</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            onClick={handleLogout}
-                            className='item__link'
-                        >
-                            <img src={Logout} alt='Sair' />
-                            <span>Sair</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+        <>
+            {/* TOPO fixo no mobile */}
+            <div className="top-bar">
+                <img src={Logo} alt="logo do code connect" className="logo-mobile" />
+                <button
+                    className="top-bar__btn"
+                    onClick={() => navigate('/codeconnect/publish')}
+                >
+                    Publicar
+                </button>
+            </div>
+
+            {/* SIDEBAR (lateral no desktop, rodapé no mobile) */}
+            <aside>
+                {/* Logo visível apenas no desktop */}
+                <img src={Logo} alt="logo do code connect" className="logo-desktop" />
+
+                <nav>
+                    <ul className="lista-sidebar">
+                        {/* Botão Publicar (só no desktop) */}
+                        <li className="item__link-publicacao-wrapper">
+                            <a
+                                onClick={() => navigate('/codeconnect/publish')}
+                                className="item__link-publicacao"
+                            >
+                                Publicar
+                            </a>
+                        </li>
+
+                        {/* Feed */}
+                        <li>
+                            <a
+                                onClick={() => navigate('/codeconnect/feed')}
+                                className={`item__link ${currentPath === '/codeconnect/feed' ? 'item__link-ativo' : ''}`}
+                            >
+                                <img
+                                    src={currentPath === '/codeconnect/feed' ? FeedAtivo : Feed}
+                                    alt='Feed'
+                                />
+                                <span>Feed</span>
+                            </a>
+                        </li>
+
+                        {/* Perfil */}
+                        <li>
+                            <a
+                                onClick={() => navigate('/codeconnect/perfil')}
+                                className={`item__link ${currentPath === '/codeconnect/perfil' ? 'item__link-ativo' : ''}`}
+                            >
+                                <img
+                                    src={currentPath === '/codeconnect/perfil' ? AccountAtivo : Account}
+                                    alt='Perfil'
+                                />
+                                <span>Perfil</span>
+                            </a>
+                        </li>
+
+                        {/* Sobre nós */}
+                        <li>
+                            <a
+                                onClick={() => navigate('/codeconnect/Sobre_nos')}
+                                className={`item__link ${currentPath === '/codeconnect/Sobre_nos' ? 'item__link-ativo' : ''}`}
+                            >
+                                <img
+                                    src={currentPath === '/codeconnect/Sobre_nos' ? InfoAtivo : Info}
+                                    alt='Sobre nós'
+                                />
+                                <span>Sobre nós</span>
+                            </a>
+                        </li>
+
+                        {/* Sair */}
+                        <li>
+                            <a
+                                onClick={handleLogout}
+                                className="item__link"
+                            >
+                                <img src={Logout} alt='Sair' />
+                                <span>Sair</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+        </>
     );
 }
