@@ -1,20 +1,36 @@
-// src/pages/Feed/index.jsx
-import { useEffect, useState } from 'react'
-import BarraDePesquisa from '../../componentes/BarraDePesquisa'
-import Card from '../../componentes/Card'
-import Filtro from '../../componentes/Filtro'
-import Ordenacao from '../../componentes/Ordenacao'
-import Sidebar from '../../componentes/sidebar'
-import './styles.css'
+import { useEffect, useState } from 'react';
+import { supabase } from '../../lib/supabaseClient';
+import BarraDePesquisa from '../../componentes/BarraDePesquisa';
+import Card from '../../componentes/Card';
+import Filtro from '../../componentes/Filtro';
+import Ordenacao from '../../componentes/Ordenacao';
+import Sidebar from '../../componentes/sidebar';
+import './styles.css';
 
 export default function Feed() {
   const [dados, setDados] = useState([]);
 
-  useEffect(() => {
-    fetch('https://my-json-server.typicode.com/MonicaHillman/codeconnect-api/publicacoes')
-      .then(resposta => resposta.json())
-      .then(dados => setDados(dados))
-  }, [])
+
+
+useEffect(() => {
+  const fetchPosts = async () => {
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .order('create_at', { ascending: false });
+
+
+    if (error) {
+      console.error('Erro ao buscar publicações:', error);
+    } else {
+      console.log('Posts recebidos:', data); // <= Aqui
+      setDados(data);
+    }
+  };
+
+  fetchPosts();
+}, []);
+
 
   return (
     <div className='container'>
@@ -28,18 +44,18 @@ export default function Feed() {
             <li key={index}>
               <Card
                 id={item.id}
-                imagemUrl={item.imagem_capa}
-                titulo={item.titulo}
-                resumo={item.resumo}
-                linhasDeCodigo={item.linhas_de_codigo}
-                compartilhamentos={item.compartilhamentos}
-                comentarios={item.comentarios}
-                usuario={item.usuario}
+                imagemUrl={item.image_url}
+                titulo={item.title}
+                resumo={item.content}
+                linhasDeCodigo={0} // Pode ajustar isso no futuro
+                compartilhamentos={0}
+                comentarios={0}
+                usuario="Você" // Troque quando tiver sistema de login
               />
             </li>
           ))}
         </ul>
       </div>
     </div>
-  )
+  );
 }

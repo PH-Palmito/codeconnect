@@ -23,9 +23,15 @@ export default function Publish() {
     }
   };
 
+
 const handlePublicar = async () => {
   try {
-    console.log('Iniciando o processo de publicação...');
+    if (!nome.trim() || !descricao.trim() || !categoria.trim()|| !imagePreview) {
+  alert('Por favor, preencha todos os campos antes de publicar.');
+  return;
+}
+
+
 
     let imageUrl = null;
 

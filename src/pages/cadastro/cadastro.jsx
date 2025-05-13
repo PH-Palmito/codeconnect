@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { supabase } from '../../lib/supabaseClient';
 
 import './LoginCadastro.css';
 import Titulo from '../../componentes/login/Titulo';
@@ -23,16 +24,41 @@ export default function PaginaDeLogin() {
 
   const navigate = useNavigate();  // <-- useNavigate() aqui
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('email', email);
-    console.log('senha', senha);
-    console.log('Name', name);
-    // Aqui você pode adicionar qualquer lógica para verificar o login, como uma API
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Redireciona para o Feed
-    navigate("/codeconnect/feed");  // <-- Redirecionamento para o feed
-  };
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password: senha,
+    options: {
+      data: { name } // ainda útil para user_metadata
+    }
+  });
+
+  if (error) {
+    console.error('Erro ao cadastrar:', error.message);
+    alert('Erro ao cadastrar');
+    return;
+  }
+
+  const user = data.user;
+
+  // Salvar no banco de dados (tabela profiles)
+  const { error: profileError } = await supabase.from('profiles').insert({
+    id: user.id,
+    name: name,
+    avatar_url: "https://i.pravatar.cc/150?u=" + email // exemplo de avatar aleatório
+  });
+
+  if (profileError) {
+    console.error('Erro ao salvar perfil:', profileError.message);
+    alert('Erro ao salvar perfil');
+    return;
+  }
+
+  alert('Cadastro realizado com sucesso!');
+  navigate("/codeconnect/feed");
+};
 
   return (
     <div className="login-page">
@@ -67,9 +93,6 @@ export default function PaginaDeLogin() {
               setValor={setSenha}
             />
 
-            <fieldset className="form__opcoes">
-              <Checkbox />
-            </fieldset>
 
             <Botao>Cadastrar<ArrowRight size={20} weight="bold" style={{ marginLeft: '6px', position: 'relative', top: '2px' }} /></Botao>
           </form>
