@@ -5,9 +5,10 @@ import './styles.css';
 export default function Card({ id, imagemUrl, titulo, resumo, linhasDeCodigo, compartilhamentos, comentarios, usuario }) {
     return (
         <article className="card">
-            <div className="card__imagem">
-                <img src={imagemUrl} alt='imagem do post' />
-            </div>
+           <div className="card__imagem">
+  {imagemUrl ? <img src={imagemUrl} alt="imagem do post" /> : <p>Imagem não disponível</p>}
+</div>
+
             <div className='card__conteudo'>
                 <div className='conteudo__texto'>
                     <h3>{titulo}</h3>
@@ -30,10 +31,17 @@ export default function Card({ id, imagemUrl, titulo, resumo, linhasDeCodigo, co
                         </li>
                     </ul>
 
-                    <div className='rodape__usuario'>
-                        <img src={usuario.imagem} alt='imagem do usuário' />
-                        {usuario.nome}
-                    </div>
+                  <div className='rodape__usuario'>
+  {usuario ? (
+    <>
+      <img src={usuario.imagem || 'caminho/para/imagem-padrão.jpg'} alt='imagem do usuário' />
+      <span>{usuario.nome || 'Nome não disponível'}</span>
+    </>
+  ) : (
+    <p>Usuário não encontrado</p>
+  )}
+</div>
+
                 </div>
             </div>
         </article>

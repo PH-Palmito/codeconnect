@@ -59,14 +59,27 @@ const handlePublicar = async () => {
 
     // Inserir dados no Supabase
     console.log('Inserindo dados no banco de dados...');
-    const { error: insertError } = await supabase
-      .from('posts')
-      .insert([{
-        title: nome,
-        content: descricao,
-        tags: categoria,
-        image_url: imageUrl
-      }]);
+ // Buscar o usuário autenticado
+const {
+  data: { user },
+  error: userError
+} = await supabase.auth.getUser();
+
+if (userError || !user) {
+  throw new Error("Usuário não autenticado.");
+}
+
+// Inserir post com author_id
+const { error: insertError } = await supabase
+  .from('posts')
+  .insert([{
+    title: nome,
+    content: descricao,
+    tags: categoria,
+    image_url: imageUrl,
+    profile_id: user.id // <- agora está certo!
+  }]);
+
 
     if (insertError) throw insertError;
     console.log('Post publicado com sucesso!');

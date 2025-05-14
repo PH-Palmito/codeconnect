@@ -21,7 +21,7 @@ export default function App() {
   return (
     <BrowserRouter>
    <Routes>
-  <Route path="/codeconnect" element={<Login />} />
+  <Route path="/codeconnect/login" element={<Login />} />
   <Route path="/codeconnect/feed" element={<Feed />} />
   <Route path="/codeconnect/publish" element={<Publish />} />
   <Route path="/codeconnect/cadastro" element={<Cadastro />} />
