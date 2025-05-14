@@ -6,10 +6,11 @@ import Account from './assets/account_circle.svg';
 import AccountAtivo from './assets/account_circle_ativo.svg';
 import Info from './assets/info.svg';
 import InfoAtivo from './assets/info_ativo.svg';
-import Logout from './assets/Logout.svg';
+import Logout from './assets/logout.svg';
 import './style.css';
 
 export default function Sidebar() {
+    
     const navigate = useNavigate();
     const location = useLocation();
     const currentPath = location.pathname;

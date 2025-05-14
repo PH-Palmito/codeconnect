@@ -1,0 +1,31 @@
+.perfil {
+  display: flex;
+  height: 100vh;
+}
+
+.perfil__conteudo {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.perfil__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.perfil__foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.perfil__nome {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.perfil__publicacoes {
+  margin-top: 2rem;
+}

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 
 import Titulo from '../../componentes/login/Titulo';
@@ -30,16 +31,16 @@ export default function PaginaDeLogin() {
   const [senha, setSenha] = useState('');
 
   const navigate = useNavigate();  // <-- useNavigate() aqui
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('email', email);
-    console.log('senha', senha);
-    // Aqui você pode adicionar qualquer lógica para verificar o login, como uma API
-
-    // Redireciona para o Feed
-    navigate("/codeconnect/feed");  // <-- Redirecionamento para o feed
-  };
+  const { login } = useAuth();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    await login(email, senha); // ← login com Supabase
+    navigate("/codeconnect/feed"); // ← redireciona se der certo
+  } catch (error) {
+    alert("Erro ao fazer login: " + error.message);
+  }
+};
 
 
 

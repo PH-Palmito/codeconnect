@@ -70,9 +70,9 @@ const handleSubmit = async (e) => {
 
 
             <CampoDeDigitacao
-              label="Nome completo"
+              label="Usuario"
               tipo="text"
-              placeholder="Digite seu nome"
+              placeholder="Digite seu usuario"
               value={name}
               setValor={setName}
             />
