@@ -1,31 +1,58 @@
-.perfil {
+.perfil-container {
   display: flex;
-  height: 100vh;
+  gap: 24px;
+  padding: 20px;
 }
 
-.perfil__conteudo {
+.perfil-content {
   flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
 }
 
-.perfil__info {
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 999px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.perfil-container {
+  display: flex;
+}
+
+
+.avatar-container {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
-.perfil__foto {
+.avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
-.perfil__nome {
-  font-size: 1.8rem;
-  font-weight: bold;
+.edit-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.perfil__publicacoes {
-  margin-top: 2rem;
+.edit-profile input {
+  margin: 5px 0;
+  padding: 8px;
+  width: 300px;
+}
+
+.edit-profile button {
+  margin-top: 10px;
+  padding: 8px 16px;
+}
+
+.bio {
+  margin-top: 10px;
+  max-width: 600px;
+  font-size: 16px;
+  color: #ccc;
 }
