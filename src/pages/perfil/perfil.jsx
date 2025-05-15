@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
+import { Pencil } from '@phosphor-icons/react';
+
 import { supabase } from '../../lib/supabaseClient';
 import Sidebar from '../../componentes/sidebar';
 import Card from '../../componentes/Card';
-import { Pencil } from '@phosphor-icons/react';
+
 import './perfil.css';
 
 export default function Perfil() {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
+
   const [newName, setNewName] = useState('');
   const [newAvatar, setNewAvatar] = useState(null);
+  const [newBio, setNewBio] = useState('');
+
   const [imageUrl, setImageUrl] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -55,14 +60,16 @@ export default function Perfil() {
       console.error('Erro ao buscar perfil:', error.message);
     } else {
       setProfile(data);
-      setNewName(data.name);
-      setImageUrl(data.avatar_url);
+      setNewName(data.name || '');
+      setNewBio(data.bio || '');
+      setImageUrl(data.avatar_url || '');
     }
 
     setLoading(false);
   }
 
   const handleNameChange = (e) => setNewName(e.target.value);
+  const handleBioChange = (e) => setNewBio(e.target.value);
   const handleAvatarChange = (e) => setNewAvatar(e.target.files[0]);
 
   const handleSaveChanges = async () => {
@@ -105,12 +112,18 @@ export default function Perfil() {
         id: profile.id,
         name: newName,
         avatar_url: finalImageUrl,
+        bio: newBio,
       });
 
     if (error) {
       console.error('Erro ao salvar alterações:', error.message);
     } else {
-      setProfile(data[0]);
+      setProfile({
+        ...profile,
+        name: newName,
+        avatar_url: finalImageUrl,
+        bio: newBio,
+      });
       setImageUrl(finalImageUrl);
       setEditMode(false);
       setSuccessMessage('Alterações salvas com sucesso!');
@@ -129,9 +142,7 @@ export default function Perfil() {
         <h1>Perfil de {profile.name}</h1>
 
         {successMessage && (
-          <div className="success-message">
-            {successMessage}
-          </div>
+          <div className="success-message">{successMessage}</div>
         )}
 
         <div className="avatar-container">
@@ -151,6 +162,7 @@ export default function Perfil() {
                 onChange={handleNameChange}
               />
             </div>
+
             <div>
               <label>Imagem de Perfil:</label>
               <input
@@ -158,11 +170,27 @@ export default function Perfil() {
                 onChange={handleAvatarChange}
               />
             </div>
-            <button onClick={handleSaveChanges}>Salvar</button>
+
+            <div>
+              <label>Biografia:</label>
+              <textarea
+                value={newBio}
+                onChange={handleBioChange}
+                rows={4}
+              />
+            </div>
+
+            <button onClick={handleSaveChanges}>Atualizar</button>
             <button onClick={() => setEditMode(false)}>Cancelar</button>
           </div>
         ) : (
           <div>
+            <div className="bio-section">
+              <p className="bio">
+                {profile.bio || 'Este usuário ainda não escreveu uma biografia.'}
+              </p>
+            </div>
+
             <h2>Posts</h2>
             <div className="lista-cards">
               {profile.posts && profile.posts.length > 0 ? (

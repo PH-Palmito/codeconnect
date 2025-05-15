@@ -10,19 +10,10 @@ import Subtitulo from '../../componentes/login/Subtitulo';
 
 import CampoDeDigitacao from '../../componentes/login/CampoDeDigitacao';
 import Botao from '../../componentes/login/Botao';
-
 import Checkbox from '../../componentes/login/Checkbox';
-
 import Texto from '../../componentes/login/Texto';
-
 import ItemRedesSociais from '../../componentes/login/ItemRedesSociais';
-
-
-
-
 import imagemLogin from '../../../src/assets/imagens/imagem-login.png';
-;
-
 import { useState } from 'react';
 import { ClipboardText } from "@phosphor-icons/react";
 

@@ -53,10 +53,21 @@
 }
 
 .conteudo__texto p {
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 23px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  /* Propriedade padrão para compatibilidade futura */
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
 }
+
+
 
 .conteudo__rodape {
     display: flex;
@@ -96,4 +107,57 @@
     height: 32px;
     border-radius: 100%;
     object-fit: cover;
+}
+.card__link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.leia-mais {
+  color: var(--verde-destaque);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+
+}
+.codigo__container {
+  margin-top: 24px;
+  background-color:var(--cinza-escuro);
+  color: var(--cinza-claro);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.codigo__container pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.botao-curtida {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-direction: column;
+}
+
+.botao-curtida img {
+  width: 20px;
+  height: 20px;
+}
+
+.botao-curtida span {
+  font-size: 14px;
+  color: #333;
+}
+
+.botao-curtida.curtido img {
+  filter: invert(45%) sepia(93%) saturate(325%) hue-rotate(75deg) brightness(95%) contrast(85%);
+}
+
+.botao-curtida.curtido span {
+  color: #2ecc71;
 }

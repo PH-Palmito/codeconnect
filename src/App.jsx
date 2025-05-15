@@ -1,18 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+// Páginas
 import Login from "./pages/LoginFolder/login";
 import Feed from "./pages/Feed";
 import Publish from "./pages/Publicar/publish";
 import Cadastro from "./pages/cadastro/cadastro";
-import Sobre_nos from "./pages/about_us/sobre_nos";
-import PaginaPerfil from './pages/perfil/perfil';
-import RotaPrivada from './componentes/RotaPrivada';
-import { useEffect, useState } from "react";
+import SobreNos from "./pages/about_us/sobre_nos";
+import PaginaPerfil from "./pages/perfil/perfil";
+import Detalhes from "./pages/Detalhes/detalhes";
+
+
+// Componentes
+import RotaPrivada from "./componentes/RotaPrivada";
 
 export default function App() {
-   const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState(null);
 
   useEffect(() => {
-    const usuarioSalvo = localStorage.getItem('usuarioLogado');
+    const usuarioSalvo = localStorage.getItem("usuarioLogado");
     if (usuarioSalvo) {
       setUsuario(JSON.parse(usuarioSalvo));
     }
@@ -20,19 +26,23 @@ export default function App() {
 
   return (
     <BrowserRouter>
-   <Routes>
-  <Route path="/codeconnect/" element={<Login />} />
-  <Route path="/codeconnect/feed" element={<Feed />} />
-  <Route path="/codeconnect/publish" element={<Publish />} />
-  <Route path="/codeconnect/cadastro" element={<Cadastro />} />
-  <Route path="/codeconnect/Sobre_nos" element={<Sobre_nos />} />
-  <Route path="/codeconnect/perfil" element={
-  <RotaPrivada>
-    <PaginaPerfil />
-  </RotaPrivada>
-  }/>
-</Routes>
+      <Routes>
+        <Route path="/codeconnect/" element={<Feed />} />
+        <Route path="/codeconnect/login" element={<Login />} />
+        <Route path="/codeconnect/publish" element={<Publish />} />
+        <Route path="/codeconnect/cadastro" element={<Cadastro />} />
+        <Route path="/codeconnect/sobre-nos" element={<SobreNos />} />
+        <Route path="/codeconnect/detalhes/:id" element={<Detalhes />} />
 
+        <Route
+          path="/codeconnect/perfil"
+          element={
+            <RotaPrivada>
+              <PaginaPerfil />
+            </RotaPrivada>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

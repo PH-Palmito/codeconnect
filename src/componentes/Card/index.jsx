@@ -1,85 +1,105 @@
-import { supabase } from '../../lib/supabaseClient' // ou './lib/supabaseClient' dependendo do nome do seu arquivo
-
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from '../../context/AuthContext';
+import { supabase } from '../../lib/supabaseClient';
 
 import Code from './assets/code.svg';
 import Chat from './assets/chat.svg';
 import Share from './assets/share.svg';
 import './styles.css';
 
-const { data: posts } = await supabase
-  .from('posts')
-  .select(`
-    id,
-    title,
-    content,
-    tags,
-    image_url,
-    profiles (
-      name,
-      avatar_url
-    )
-  `);
-{posts.map(post => (
-  <Card
-    key={post.id}
-    id={post.id}
-    imagemUrl={post.image_url}
-    titulo={post.title}
-    resumo={post.content}
-    linhasDeCodigo={post.tags?.split(',').length || 0}
-    compartilhamentos={0} // ou do seu backend
-    comentarios={0} // ou do seu backend
-    usuario={{
-      nome: post.profiles?.name,
-      imagem: post.profiles?.avatar_url
-    }}
-  />
-))}
+export default function Card({ id, imagemUrl, titulo, resumo, linhasDeCodigo, compartilhamentos, comentarios, usuario, likes = [] }) {
+  const { usuario: user } = useAuth();
+  const userId = user?.id;
+  const [curtidas, setCurtidas] = useState(likes);
+  const navigate = useNavigate();
 
+  const jaCurtiu = userId && curtidas.some(like => like.user_id === userId);
 
-export default function Card({ id, imagemUrl, titulo, resumo, linhasDeCodigo, compartilhamentos, comentarios, usuario }) {
-    return (
-        <article className="card">
-           <div className="card__imagem">
-  {imagemUrl ? <img src={imagemUrl} alt="imagem do post" /> : <p>Imagem não disponível</p>}
-</div>
+  async function toggleLike(e) {
+    e.preventDefault(); // Impede navegação pelo Link
+    e.stopPropagation();
 
-            <div className='card__conteudo'>
-                <div className='conteudo__texto'>
-                    <h3>{titulo}</h3>
-                    <p>{resumo}</p>
-                </div>
+    if (!userId) {
+      alert("Você precisa estar logado para curtir.");
+      return;
+    }
 
-                <div className='conteudo__rodape'>
-                    <ul>
-                        <li>
-                            <img src={Code} alt='códigos' />
-                            {linhasDeCodigo}
-                        </li>
-                        <li>
-                            <img src={Share} alt='compartilhamentos' />
-                            {compartilhamentos}
-                        </li>
-                        <li>
-                            <img src={Chat} alt='comentários' />
-                            {comentarios}
-                        </li>
-                    </ul>
+    try {
+      if (jaCurtiu) {
+        await supabase
+          .from("likes")
+          .delete()
+          .match({ post_id: id, user_id: userId });
 
-                  <div className='rodape__usuario'>
-  {usuario ? (
-    <>
-    <img src={usuario.imagem || `https://ui-avatars.com/api/?name=${usuario.nome}`} alt='imagem do usuário' />
+        setCurtidas(prev => prev.filter(like => like.user_id !== userId));
+      } else {
+        await supabase
+          .from("likes")
+          .insert([{ post_id: id, user_id: userId }]);
 
-      <span>{usuario.nome || 'Nome não disponível'}</span>
-    </>
-  ) : (
-    <p>Usuário não encontrado</p>
-  )}
-</div>
+        setCurtidas(prev => [...prev, { user_id: userId }]);
+      }
+    } catch (error) {
+      console.error("Erro ao curtir:", error.message);
+    }
+  }
 
-                </div>
+  return (
+    <Link to={`/codeconnect/detalhes/${id}`} className="card__link">
+      <article className="card">
+        <div className="card__imagem">
+          {imagemUrl ? <img src={imagemUrl} alt="imagem do post" /> : <p>Imagem não disponível</p>}
+        </div>
+
+        <div className='card__conteudo'>
+          <div className='conteudo__texto'>
+            <h3>{titulo}</h3>
+            <p>
+              {resumo.length > 50 ? (
+                <>
+                  {resumo.slice(0, 50)} <span className="leia-mais">leia mais...</span>
+                </>
+              ) : resumo}
+            </p>
+          </div>
+
+          <div className='conteudo__rodape'>
+            <ul>
+              <li>
+            <button
+            onClick={toggleLike}
+            className={`botao-curtida ${jaCurtiu ? 'curtido' : ''}`}
+            aria-label="Curtir post"
+            >
+            <img src={Code} alt="códigos" />
+            <span>{curtidas.length}</span>
+            </button>
+
+              </li>
+              <li>
+                <img src={Share} alt='compartilhamentos' />
+                {compartilhamentos}
+              </li>
+              <li>
+                <img src={Chat} alt='comentários' />
+                {comentarios}
+              </li>
+            </ul>
+
+            <div className='rodape__usuario'>
+              {usuario ? (
+                <>
+                  <img src={usuario.imagem || `https://ui-avatars.com/api/?name=${usuario.nome}`} alt='imagem do usuário' />
+                  <span>{usuario.nome || 'Nome não disponível'}</span>
+                </>
+              ) : (
+                <p>Usuário não encontrado</p>
+              )}
             </div>
-        </article>
-    )
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
 }

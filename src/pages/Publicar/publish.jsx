@@ -9,6 +9,7 @@ export default function Publish() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [codigo, setCodigo] = useState('');
   const fileInputRef = useRef(null);
 
   const handleUploadClick = () => {
@@ -23,96 +24,90 @@ export default function Publish() {
     }
   };
 
+  const handlePublicar = async () => {
+    try {
+      if (!nome.trim() || !descricao.trim() || !categoria.trim() || !imagePreview) {
+        alert('Por favor, preencha todos os campos antes de publicar.');
+        return;
+      }
 
-const handlePublicar = async () => {
-  try {
-    if (!nome.trim() || !descricao.trim() || !categoria.trim()|| !imagePreview) {
-  alert('Por favor, preencha todos os campos antes de publicar.');
-  return;
-}
+      let imageUrl = null;
 
+      if (fileInputRef.current.files.length > 0) {
+        const file = fileInputRef.current.files[0];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}.${fileExt}`;
+        const filePath = `${fileName}`;
 
+        const { error: uploadError } = await supabase.storage
+          .from('images')
+          .upload(filePath, file);
 
-    let imageUrl = null;
+        if (uploadError) throw uploadError;
 
-    if (fileInputRef.current.files.length > 0) {
-      const file = fileInputRef.current.files[0];
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Date.now()}.${fileExt}`;
-      const filePath = `${fileName}`;
+        const { data } = supabase.storage.from('images').getPublicUrl(filePath);
+        imageUrl = data.publicUrl;
+      }
 
-      console.log('Iniciando upload da imagem:', file);
+      const {
+        data: { user },
+        error: userError
+      } = await supabase.auth.getUser();
 
-      // Upload da imagem para o bucket 'images'
-      let { error: uploadError } = await supabase.storage
-        .from('images')
-        .upload(filePath, file);
+      if (userError || !user) {
+        throw new Error("Usuário não autenticado.");
+      }
 
-      if (uploadError) throw uploadError;
-      console.log('Imagem enviada com sucesso!');
+      const { error: insertError } = await supabase
+        .from('posts')
+        .insert([{
+          title: nome,
+          content: descricao,
+          tags: categoria,
+          image_url: imageUrl,
+          codigo: codigo,
+          profile_id: user.id
+        }]);
 
-      // Gerar URL pública
-      const { data } = supabase.storage.from('images').getPublicUrl(filePath);
-      imageUrl = data.publicUrl;
-      console.log('URL da imagem:', imageUrl);
+      if (insertError) throw insertError;
+
+      alert('Post publicado com sucesso!');
+      setNome('');
+      setDescricao('');
+      setCategoria('');
+      setCodigo('');
+      setImagePreview(null);
+    } catch (error) {
+      console.error('Erro ao publicar:', error.message);
+      alert('Erro ao publicar post.');
     }
-
-    // Inserir dados no Supabase
-    console.log('Inserindo dados no banco de dados...');
- // Buscar o usuário autenticado
-const {
-  data: { user },
-  error: userError
-} = await supabase.auth.getUser();
-
-if (userError || !user) {
-  throw new Error("Usuário não autenticado.");
-}
-
-// Inserir post com author_id
-const { error: insertError } = await supabase
-  .from('posts')
-  .insert([{
-    title: nome,
-    content: descricao,
-    tags: categoria,
-    image_url: imageUrl,
-    profile_id: user.id // <- agora está certo!
-  }]);
-
-
-    if (insertError) throw insertError;
-    console.log('Post publicado com sucesso!');
-
-    alert('Post publicado com sucesso!');
-    // Resetar campos se quiser
-    setNome('');
-    setDescricao('');
-    setCategoria('');
-    setImagePreview(null);
-  } catch (error) {
-    console.error('Erro ao publicar:', error.message);
-    alert('Erro ao publicar post.');
-  }
-};
-
+  };
 
   return (
     <div className="page">
       <Sidebar />
+
       <main>
         <div className="container-upload-imagem">
           <div className="container-imagem">
-            <img src={imagePreview || "src/assets/imagens/card_code_editor.png"} alt="preview" className="main-imagem" />
+            <img
+              src={imagePreview || "src/assets/imagens/card_code_editor.png"}
+              alt="preview"
+              className="main-imagem"
+            />
           </div>
 
           <button className="button-upload" onClick={handleUploadClick}>
             Carregar imagem
-            <UploadSimple size={18} weight="bold" style={{ marginLeft: '8px', position: 'relative', top: '2px' }} />
+            <UploadSimple
+              size={18}
+              weight="bold"
+              style={{ marginLeft: '8px', position: 'relative', top: '2px' }}
+            />
           </button>
+
           <input
             type="file"
-            id="image-upload"
             accept="image/*"
             ref={fileInputRef}
             style={{ display: 'none' }}
@@ -132,35 +127,63 @@ const { error: insertError } = await supabase
             <div>
               <label htmlFor="nome">
                 Nome do projeto
-                <NotePencil size={24} color='#81FE88' weight='fill' style={{ marginLeft: '4px', position: 'relative', top: '5px' }} />
+                <NotePencil size={24} color="#81FE88" weight="fill" style={{ marginLeft: '4px', top: '5px' }} />
               </label>
-              <input type="text" id="nome" name="nome" value={nome} onChange={(e) => setNome(e.target.value)} />
+              <input
+                type="text"
+                id="nome"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
             </div>
+
             <div>
               <label htmlFor="descricao">
                 Descrição
-                <PencilSimple size={24} color='#81FE88' weight='regular' style={{ marginLeft: '4px', position: 'relative', top: '5px' }} />
+                <PencilSimple size={24} color="#81FE88" weight="regular" style={{ marginLeft: '4px', top: '5px' }} />
               </label>
-              <textarea id="descricao" name="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
+              <textarea
+                id="descricao"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+              ></textarea>
             </div>
+
+            <div>
+              <label htmlFor="codigo">
+                Código do projeto (opcional)
+              </label>
+              <textarea
+                id="codigo"
+                rows="10"
+                placeholder="Cole aqui seu código..."
+                value={codigo}
+                onChange={(e) => setCodigo(e.target.value)}
+              ></textarea>
+            </div>
+
             <div>
               <label htmlFor="categoria">
                 Tags
-                <Tag size={24} color='#81FE88' weight='fill' style={{ marginLeft: '4px', position: 'relative', top: '5px' }} />
+                <Tag size={24} color="#81FE88" weight="fill" style={{ marginLeft: '4px', top: '5px' }} />
               </label>
-              <input type="text" id="input-tags" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} />
+              <input
+                type="text"
+                id="categoria"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+              />
             </div>
-            <ul className="lista-tags" id="lista-tags">
-              {/* tags futuras aqui */}
-            </ul>
+
             <div className="container-botoes">
               <button type="button" className="botao-descartar">
                 Descartar
-                <Trash size={24} weight="duotone" style={{ marginLeft: '8px', position: 'relative', top: '4px' }} />
+                <Trash size={24} weight="duotone" style={{ marginLeft: '8px', top: '4px' }} />
               </button>
+
               <button type="button" className="botao-publicar" onClick={handlePublicar}>
                 Publicar
-                <UploadSimple size={20} weight="bold" style={{ marginLeft: '8px', position: 'relative', top: '4px' }} />
+                <UploadSimple size={20} weight="bold" style={{ marginLeft: '8px', top: '4px' }} />
               </button>
             </div>
           </form>

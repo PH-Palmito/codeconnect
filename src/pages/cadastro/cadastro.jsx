@@ -57,7 +57,7 @@ const handleSubmit = async (e) => {
   }
 
   alert('Cadastro realizado com sucesso!');
-  navigate("/codeconnect/feed");
+  navigate("/codeconnect/");
 };
 
   return (
@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
               <ItemRedesSociais link="https://www.github.com" nome="Github" />
               <ItemRedesSociais link="https://www.google.com" nome="Google" />
             </ul>
-            <Texto classe="container-links__texto">Ja tem uma conta? <Link to="/codeconnect/"className="container-links__link">Faça seu login!<SignIn size={20} weight="bold" style={{ marginLeft: '6px', position: 'relative', top: '5px' }} /></Link></Texto>
+            <Texto classe="container-links__texto">Ja tem uma conta? <Link to="/codeconnect/login"className="container-links__link">Faça seu login!<SignIn size={20} weight="bold" style={{ marginLeft: '6px', position: 'relative', top: '5px' }} /></Link></Texto>
 
           </div>
         </section>

@@ -10,14 +10,14 @@ import Logout from './assets/logout.svg';
 import './style.css';
 
 export default function Sidebar() {
-    
+
     const navigate = useNavigate();
     const location = useLocation();
     const currentPath = location.pathname;
 
     function handleLogout() {
         localStorage.removeItem('token');
-        navigate('/codeconnect/');
+        navigate('/codeconnect/login');
     }
 
     return (
@@ -53,7 +53,7 @@ export default function Sidebar() {
                         {/* Feed */}
                         <li>
                             <a
-                                onClick={() => navigate('/codeconnect/feed')}
+                                onClick={() => navigate('/codeconnect/')}
                                 className={`item__link ${currentPath === '/codeconnect/feed' ? 'item__link-ativo' : ''}`}
                             >
                                 <img
@@ -81,12 +81,12 @@ export default function Sidebar() {
                         {/* Sobre nós */}
                         <li>
                             <a
-                                onClick={() => navigate('/codeconnect/Sobre_nos')}
+                                onClick={() => navigate('/codeconnect/sobre-nos')}
                                 className={`item__link ${currentPath === '/codeconnect/Sobre_nos' ? 'item__link-ativo' : ''}`}
                             >
                                 <img
-                                    src={currentPath === '/codeconnect/Sobre_nos' ? InfoAtivo : Info}
-                                    alt='Sobre nós'
+                                    src={currentPath === '/codeconnect/Sobre-nos' ? InfoAtivo : Info}
+                                    alt='Sobrenós'
                                 />
                                 <span>Sobre nós</span>
                             </a>

@@ -19,12 +19,16 @@ const updateUserProfile = async (updates) => {
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null);
 
-  useEffect(() => {
-    const usuarioSalvo = localStorage.getItem('usuarioLogado');
-    if (usuarioSalvo) {
-      setUsuario(JSON.parse(usuarioSalvo));
+ useEffect(() => {
+  const getUser = async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (data?.user) {
+      setUsuario(data.user);
     }
-  }, []);
+  };
+  getUser();
+}, []);
+
 
   async function login(email, senha) {
     const { data, error } = await supabase.auth.signInWithPassword({

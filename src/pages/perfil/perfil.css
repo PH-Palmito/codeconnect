@@ -8,29 +8,18 @@
   flex: 1;
 }
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 999px;
-  object-fit: cover;
-  margin-bottom: 20px;
-}
-
-.perfil-container {
-  display: flex;
-}
-
-
 .avatar-container {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .avatar {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  margin-right: 10px;
+  object-fit: cover;
+  margin-right: 16px;
 }
 
 .edit-icon {
@@ -39,20 +28,54 @@
   cursor: pointer;
 }
 
-.edit-profile input {
-  margin: 5px 0;
+.edit-profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 12px;
+}
+
+.edit-profile input,
+.edit-profile textarea {
   padding: 8px;
-  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
 .edit-profile button {
-  margin-top: 10px;
-  padding: 8px 16px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #81fe88;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+.edit-profile button:hover {
+  background-color: #6dda71;
+}
+
+.bio-section {
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .bio {
-  margin-top: 10px;
   max-width: 600px;
   font-size: 16px;
   color: #ccc;
+  line-height: 1.5;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
 }
