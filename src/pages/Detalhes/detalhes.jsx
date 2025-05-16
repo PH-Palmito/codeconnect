@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "../../lib/supabaseClient";
 import { useAuth } from "../../context/AuthContext";
-import Code from '../../assets/icons/code.svg'; // importe o ícone do jeito que você já faz
+import Code from '../../assets/icons/code.svg';
+
+import Sidebar from "../../componentes/sidebar";
+
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 export default function Detalhes() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const { usuario } = useAuth();
-
 
   useEffect(() => {
     async function carregarPost() {
@@ -20,6 +23,7 @@ export default function Detalhes() {
           id,
           title,
           content,
+          codigo,
           tags,
           image_url,
           profiles (
@@ -42,7 +46,8 @@ export default function Detalhes() {
     }
 
     carregarPost();
-  }, [id]);
+    }, [id, usuario]);
+
 
   if (!post) return <p>Carregando post...</p>;
 
@@ -81,66 +86,78 @@ export default function Detalhes() {
     }
   }
 
-  return (
-    <div style={{ padding: "2rem" }}>
-      <img
-        src={post.image_url}
-        alt="imagem do post"
-        style={{ maxWidth: "100%", borderRadius: "1rem", marginBottom: "1rem" }}
-      />
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <p><strong>Tags:</strong> {post.tags}</p>
+ return (
+<div className="page">
+  <Sidebar />
 
-      <hr />
-       {post.codigo && (
-          <div className="codigo">
-            <h2>Código do Projeto:</h2>
-            <SyntaxHighlighter language="javascript" style={vscDarkPlus}>
-              {post.codigo}
-            </SyntaxHighlighter>
-          </div>
-        )}
+  <div className="detalhes">
+    <div className="conteudo-detalhes">
+    <img
+      src={post.image_url}
+      alt="imagem do post"
+      className="imagem-projeto"
+    />
 
-      <div style={{ marginTop: "1rem" }}>
-        <h3>Autor</h3>
-        <img
-          src={post.profiles?.avatar_url || `https://ui-avatars.com/api/?name=${post.profiles?.name}`}
-          alt="avatar"
-          style={{ width: 50, borderRadius: "50%" }}
-        />
-        <p><strong>Nome:</strong> {post.profiles?.name}</p>
+    <h1 className="titulo">{post.title}</h1>
+    <p className="descricao">{post.content}</p>
+    <p className="tags"><strong>Tags:</strong> {post.tags}</p>
+
+    <hr />
+
+    {post.codigo && (
+      <div className="codigo">
+        <h2>Código do Projeto:</h2>
+        <SyntaxHighlighter language="javascript" style={vscDarkPlus}>
+          {post.codigo}
+        </SyntaxHighlighter>
       </div>
+    )}
 
-      <hr />
+    <div className="autor">
+      <img
+        src={post.profiles?.avatar_url || `https://ui-avatars.com/api/?name=${post.profiles?.name}`}
+        alt="avatar"
+        className="avatar"
+      />
+      <p><strong>Nome:</strong> {post.profiles?.name}</p>
+    </div>
 
-      <div>
-        <button
-          onClick={toggleLike}
+    <hr />
+
+    <div className="like-container">
+      <button
+        onClick={toggleLike}
+        style={{
+          cursor: "pointer",
+          background: "none",
+          border: "none",
+          padding: 0,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          userSelect: "none"
+        }}
+      >
+        <img
+          src={Code}
+          alt="Curtir"
           style={{
-            cursor: "pointer",
-            background: "none",
-            border: "none",
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            userSelect: "none"
+            width: 28,
+            height: 28,
+            filter: jaCurtiu
+              ? 'invert(37%) sepia(100%) saturate(2693%) hue-rotate(93deg) brightness(94%) contrast(92%)'
+              : 'none'
           }}
-          aria-label="Curtir post"
-        >
-          <img
-            src={Code}
-            alt="Curtir"
-            style={{
-              width: 24,
-              height: 24,
-              filter: jaCurtiu ? 'invert(37%) sepia(100%) saturate(2693%) hue-rotate(93deg) brightness(94%) contrast(92%)' : 'none',
-              marginRight: 8
-            }}
-          />
+        />
+        <span style={{ fontSize: "0.85rem", marginTop: "0.25rem" }}>
           {post.likes.length}
-        </button>
+        </span>
+      </button>
       </div>
     </div>
-  );
+  </div>
+</div>
+
+);
+
 }

@@ -27,7 +27,7 @@ export default function PaginaDeLogin() {
   e.preventDefault();
   try {
     await login(email, senha); // ← login com Supabase
-    navigate("/codeconnect/feed"); // ← redireciona se der certo
+    navigate("/codeconnect/"); // ← redireciona se der certo
   } catch (error) {
     alert("Erro ao fazer login: " + error.message);
   }

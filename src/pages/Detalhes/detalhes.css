@@ -1,7 +1,6 @@
 .page {
   display: flex;
   min-height: 100vh;
-
 }
 
 .detalhes {
@@ -10,6 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  background-color: var(--preto-fundo); /* se tiver variáveis */
 }
 
 .imagem-projeto {
@@ -41,6 +41,70 @@
   gap: 0.5rem;
 }
 
+.codigo h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.autor {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+}
+
+.detalhes {
+  flex: 1;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.imagem-projeto {
+  width: 60%;
+  max-height: 400px;
+  max-width: 800px;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.titulo {
+  font-size: 2rem;
+  color: var(--branco);
+  margin: 0;
+}
+
+.descricao {
+  font-size: 1.1rem;
+  color: var(--branco);
+  line-height: 1.6;
+}
+
+.tags {
+  font-size: 0.95rem;
+  color: var(--verde-destaque);
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
 
 .codigo h2 {
   font-size: 1.4rem;
@@ -60,4 +124,43 @@
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ccc;
+}
+
+
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .page {
+    flex-direction: column;
+  }
+
+  .detalhes {
+    padding: 1rem;
+  }
+
+  .imagem-projeto {
+    max-height: 250px;
+
+  }
+
+  .titulo {
+    font-size: 1.5rem;
+  }
+
+  .descricao {
+    font-size: 1rem;
+  }
+
+  .tags {
+    font-size: 0.85rem;
+  }
+
+  .codigo h2 {
+    font-size: 1.1rem;
+  }
+
+  .autor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

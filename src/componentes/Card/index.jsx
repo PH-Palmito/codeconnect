@@ -14,8 +14,27 @@ export default function Card({ id, imagemUrl, titulo, resumo, linhasDeCodigo, co
   const [curtidas, setCurtidas] = useState(likes);
   const navigate = useNavigate();
 
-  const jaCurtiu = userId && curtidas.some(like => like.user_id === userId);
 
+
+  const jaCurtiu = userId && curtidas.some(like => like.user_id === userId);
+useEffect(() => {
+  async function buscarCurtidas() {
+    const { data, error } = await supabase
+      .from("likes")
+      .select("user_id")
+      .eq("post_id", id);
+
+    if (error) {
+      console.error("Erro ao buscar curtidas:", error.message);
+    } else {
+      setCurtidas(data);
+    }
+  }
+
+  if (id) {
+    buscarCurtidas();
+  }
+}, [id, userId]);
   async function toggleLike(e) {
     e.preventDefault(); // Impede navegação pelo Link
     e.stopPropagation();
