@@ -4,7 +4,7 @@
 body {
 
 color: var(--branco);
- 
+
   font-family: var(--fonte);
   display: flex;
   justify-content: center;
@@ -84,6 +84,7 @@ form div label {
 .container-imagem-nome {
   color: var(--cinza-medio);
   padding-top: 1em;
+
 }
 
 form div input,
@@ -201,6 +202,7 @@ form div input {
   top: 50%;
   transform: translateY(-50%);
   margin-left: 8px;
+
 }
 
 .container-imagem-nome {
@@ -208,4 +210,69 @@ form div input {
   gap: 8px;
   color: var(--cinza-medio);
   font-size: 15px;
+}
+@media (max-width: 1024px) {
+  .page {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 32px 16px;
+  }
+
+  main {
+    flex-direction: column;
+    width: 100%;
+    padding: 24px;
+  }
+
+  .container-descricao {
+    width: 100%;
+  }
+
+  .container-upload-imagem {
+    width: 100%;
+  }
+
+  .container-upload-imagem .container-imagem {
+    width: 100%;
+    text-align: center;
+  }
+
+  .container-upload-imagem img.main-imagem {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .container-botoes {
+    flex-direction: column;
+  }
+
+  .container-botoes button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 22px;
+  }
+
+  form div label {
+    font-size: 16px;
+  }
+
+  form div input,
+  textarea {
+    font-size: 14px;
+    line-height: 32px;
+  }
+
+  .container-botoes button {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .container-upload-imagem button {
+    font-size: 16px;
+  }
 }
