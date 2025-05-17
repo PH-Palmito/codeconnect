@@ -27,8 +27,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Feed />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/feed" element={<Feed />} />
         <Route path="/publish" element={<Publish />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/sobre-nos" element={<SobreNos />} />

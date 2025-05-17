@@ -4,6 +4,7 @@ import { Pencil } from '@phosphor-icons/react';
 import { supabase } from '../../lib/supabaseClient';
 import Sidebar from '../../componentes/sidebar';
 import Card from '../../componentes/Card';
+import Mensagem from '../../componentes/mensagem/mensagem';
 
 import './perfil.css';
 
@@ -18,6 +19,7 @@ export default function Perfil() {
 
   const [imageUrl, setImageUrl] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchProfile();
@@ -32,7 +34,7 @@ export default function Perfil() {
     } = await supabase.auth.getUser();
 
     if (userError) {
-      console.error('Erro ao obter usuário:', userError.message);
+      setErrorMessage('Erro ao obter usuário: ' + userError.message);
       setLoading(false);
       return;
     }
@@ -57,7 +59,7 @@ export default function Perfil() {
       .single();
 
     if (error) {
-      console.error('Erro ao buscar perfil:', error.message);
+      setErrorMessage('Erro ao buscar perfil: ' + error.message);
     } else {
       setProfile(data);
       setNewName(data.name || '');
@@ -74,7 +76,7 @@ export default function Perfil() {
 
   const handleSaveChanges = async () => {
     if (!profile?.id) {
-      console.error('ID do perfil não encontrado!');
+      setErrorMessage('ID do perfil não encontrado!');
       return;
     }
 
@@ -90,7 +92,7 @@ export default function Perfil() {
         .upload(filePath, newAvatar);
 
       if (uploadError) {
-        console.error('Erro ao fazer upload da imagem:', uploadError.message);
+        setErrorMessage('Erro ao fazer upload da imagem: ' + uploadError.message);
         return;
       }
 
@@ -99,7 +101,7 @@ export default function Perfil() {
         .getPublicUrl(filePath);
 
       if (publicUrlError) {
-        console.error('Erro ao obter URL da imagem:', publicUrlError.message);
+        setErrorMessage('Erro ao obter URL da imagem: ' + publicUrlError.message);
         return;
       }
 
@@ -116,7 +118,7 @@ export default function Perfil() {
       });
 
     if (error) {
-      console.error('Erro ao salvar alterações:', error.message);
+      setErrorMessage('Erro ao salvar alterações: ' + error.message);
     } else {
       setProfile({
         ...profile,
@@ -141,9 +143,8 @@ export default function Perfil() {
       <div className="perfil-content">
         <h1>Perfil de {profile.name}</h1>
 
-        {successMessage && (
-          <div className="success-message">{successMessage}</div>
-        )}
+        <Mensagem tipo="sucesso" texto={successMessage} />
+        <Mensagem tipo="erro" texto={errorMessage} />
 
         <div className="avatar-container">
           <img src={imageUrl} alt="Avatar" className="avatar" />

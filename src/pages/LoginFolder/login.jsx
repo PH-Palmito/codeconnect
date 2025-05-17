@@ -1,45 +1,41 @@
-import { useNavigate } from "react-router-dom";
-
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-
-
-import Titulo from '../../componentes/login/Titulo';
-
-import Subtitulo from '../../componentes/login/Subtitulo';
-
-import CampoDeDigitacao from '../../componentes/login/CampoDeDigitacao';
-import Botao from '../../componentes/login/Botao';
-import Checkbox from '../../componentes/login/Checkbox';
-import Texto from '../../componentes/login/Texto';
-import ItemRedesSociais from '../../componentes/login/ItemRedesSociais';
-import imagemLogin from '../../../src/assets/imagens/imagem-login.png';
-import { useState } from 'react';
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { ClipboardText } from "@phosphor-icons/react";
 
+import { useAuth } from "../../context/AuthContext";
+
+import Titulo from "../../componentes/login/Titulo";
+import Subtitulo from "../../componentes/login/Subtitulo";
+import CampoDeDigitacao from "../../componentes/login/CampoDeDigitacao";
+import Botao from "../../componentes/login/Botao";
+import Checkbox from "../../componentes/login/Checkbox";
+import Texto from "../../componentes/login/Texto";
+import ItemRedesSociais from "../../componentes/login/ItemRedesSociais";
+
+import imagemLogin from "../../../src/assets/imagens/imagem-login.png";
+
 export default function PaginaDeLogin() {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { login } = useAuth();
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    await login(email, senha);
-    navigate("/"); //
-  } catch (error) {
-    alert("Erro ao fazer login: " + error.message);
-  }
-};
 
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, senha);
+      navigate("/"); // Redireciona após login
+    } catch (error) {
+      alert("Erro ao fazer login: " + error.message);
+    }
+  };
 
   return (
     <div className="login-page">
       <div className="container-login">
+        <img src={imagemLogin} alt="Mulher negra com computador" />
 
-        <img src={imagemLogin} alt="mulher negra com computador" />
         <section>
           <form onSubmit={handleSubmit}>
             <Titulo>Login</Titulo>
@@ -63,9 +59,7 @@ export default function PaginaDeLogin() {
 
             <fieldset className="form__opcoes">
               <Checkbox />
-              <p>
-                <a href="#">Esqueci a senha</a>
-              </p>
+              <p><a href="#">Esqueci a senha</a></p>
             </fieldset>
 
             <Botao>Login</Botao>
@@ -77,11 +71,16 @@ export default function PaginaDeLogin() {
               <ItemRedesSociais link="https://www.github.com" nome="Github" />
               <ItemRedesSociais link="https://www.google.com" nome="Google" />
             </ul>
+
             <Texto classe="container-links__texto">Ainda não tem conta?</Texto>
             <Link to="/cadastro" className="container-links__link">
-  Crie seu cadastro!<ClipboardText size={22}
-  weight="duotone" style={{ marginLeft: '6px', position: 'relative', top: '5px' }}/>
-</Link>
+              Crie seu cadastro!
+              <ClipboardText
+                size={22}
+                weight="duotone"
+                style={{ marginLeft: "6px", position: "relative", top: "5px" }}
+              />
+            </Link>
           </div>
         </section>
       </div>

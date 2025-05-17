@@ -30,7 +30,7 @@
   .container-login img {
     max-width: 100%;
     height: auto;
-    
+
     border-radius: 12px;
   }
 
@@ -251,6 +251,7 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
 @media (max-width: 768px) {
     .container-login {
       flex-direction: column;
