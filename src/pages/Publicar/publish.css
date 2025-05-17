@@ -72,6 +72,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  
 }
 
 form div label {
@@ -84,6 +85,7 @@ form div label {
 .container-imagem-nome {
   color: var(--cinza-medio);
   padding-top: 1em;
+
 
 }
 
@@ -210,6 +212,7 @@ form div input {
   gap: 8px;
   color: var(--cinza-medio);
   font-size: 15px;
+  max-height: 400px;
 }
 @media (max-width: 1024px) {
   .page {
