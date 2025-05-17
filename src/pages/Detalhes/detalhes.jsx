@@ -9,7 +9,7 @@ import Sidebar from "../../componentes/sidebar";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-
+import './detalhes.css';
 export default function Detalhes() {
   const { id } = useParams();
   const [post, setPost] = useState(null);

@@ -76,7 +76,7 @@
 }
 
 .imagem-projeto {
-  width: 60%;
+  width: 100%;
   max-height: 400px;
   max-width: 800px;
   object-fit: cover;
@@ -129,7 +129,7 @@
 
 
 /* RESPONSIVO */
-@media (max-width: 668px) {
+@media (max-width: 768px) {
   .page {
     flex-direction: column;
   }
@@ -139,7 +139,8 @@
   }
 
   .imagem-projeto {
-    max-height: 250px;
+    max-height: 300px;
+    max-width: 500px;
 
   }
 
@@ -156,7 +157,7 @@
   }
 
   .codigo h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .autor {
