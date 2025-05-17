@@ -134,9 +134,17 @@
     flex-direction: column;
   }
 
-  .detalhes {
-    padding: 1rem;
-  }
+ .detalhes {
+  width: 70%;
+  overflow-wrap: break-word; /* evita que textos longos estourem */
+}
+
+.conteudo-detalhes {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 
   .imagem-projeto {
     max-height: 300px;
@@ -150,6 +158,8 @@
 
   .descricao {
     font-size: 1rem;
+    line-height: 1.4;
+
   }
 
   .tags {
