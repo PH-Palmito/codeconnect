@@ -54,7 +54,7 @@ export default function Sidebar() {
                         <li>
                             <a
                                 onClick={() => navigate('/')}
-                                className={`item__link ${currentPath === '/codeconnect/feed' ? 'item__link-ativo' : ''}`}
+                                className={`item__link ${currentPath === '/feed' ? 'item__link-ativo' : ''}`}
                             >
                                 <img
                                     src={currentPath === '/feed' ? FeedAtivo : Feed}
