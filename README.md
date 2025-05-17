@@ -3,7 +3,7 @@
 **CodeConnect** é um projeto simples de blog de notícias voltado para desenvolvedores, feito com **React.js**. A ideia principal foi colocar em prática os primeiros aprendizados com a biblioteca React, criando uma aplicação de front-end funcional e organizada.
 
 🔗 **Acesse o projeto online:**  
-[https://ph-palmito.github.io/codeconnect/](https://ph-palmito.github.io/codeconnect/)
+[https://ph-palmito.github.io/codeconnect/](https://codeconnect-red.vercel.app/)
 
 ---
 
