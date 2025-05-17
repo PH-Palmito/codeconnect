@@ -88,7 +88,7 @@ const handleSubmit = async (e) => {
             <CampoDeDigitacao
               label="Senha"
               tipo="password"
-              placeholder="Digite sua senha"
+              placeholder="Digite sua senha de 6 ou mais caracteres"
               value={senha}
               setValor={setSenha}
             />
