@@ -17,7 +17,7 @@ export default function Sidebar() {
 
     function handleLogout() {
         localStorage.removeItem('token');
-        navigate('/login');
+        navigate('/');
     }
 
     return (
@@ -53,7 +53,7 @@ export default function Sidebar() {
                         {/* Feed */}
                         <li>
                             <a
-                                onClick={() => navigate('/')}
+                                onClick={() => navigate('/feed')}
                                 className={`item__link ${currentPath === '/feed' ? 'item__link-ativo' : ''}`}
                             >
                                 <img

@@ -25,7 +25,7 @@ export default function PaginaDeLogin() {
     e.preventDefault();
     try {
       await login(email, senha);
-      navigate("/"); // Redireciona após login
+      navigate("/feed"); // Redireciona após login
     } catch (error) {
       alert("Erro ao fazer login: " + error.message);
     }
