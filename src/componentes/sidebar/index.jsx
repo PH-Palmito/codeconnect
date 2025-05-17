@@ -17,7 +17,7 @@ export default function Sidebar() {
 
     function handleLogout() {
         localStorage.removeItem('token');
-        navigate('/codeconnect/login');
+        navigate('/login');
     }
 
     return (
@@ -27,7 +27,7 @@ export default function Sidebar() {
                 <img src={Logo} alt="logo do code connect" className="logo-mobile" />
                 <button
                     className="top-bar__btn"
-                    onClick={() => navigate('/codeconnect/publish')}
+                    onClick={() => navigate('/publish')}
                 >
                     Publicar
                 </button>
@@ -43,7 +43,7 @@ export default function Sidebar() {
                         {/* Botão Publicar (só no desktop) */}
                         <li className="item__link-publicacao-wrapper">
                             <a
-                                onClick={() => navigate('/codeconnect/publish')}
+                                onClick={() => navigate('/publish')}
                                 className="item__link-publicacao"
                             >
                                 Publicar
@@ -53,11 +53,11 @@ export default function Sidebar() {
                         {/* Feed */}
                         <li>
                             <a
-                                onClick={() => navigate('/codeconnect/')}
+                                onClick={() => navigate('/')}
                                 className={`item__link ${currentPath === '/codeconnect/feed' ? 'item__link-ativo' : ''}`}
                             >
                                 <img
-                                    src={currentPath === '/codeconnect/feed' ? FeedAtivo : Feed}
+                                    src={currentPath === '/feed' ? FeedAtivo : Feed}
                                     alt='Feed'
                                 />
                                 <span>Feed</span>
@@ -67,11 +67,11 @@ export default function Sidebar() {
                         {/* Perfil */}
                         <li>
                             <a
-                                onClick={() => navigate('/codeconnect/perfil')}
-                                className={`item__link ${currentPath === '/codeconnect/perfil' ? 'item__link-ativo' : ''}`}
+                                onClick={() => navigate('/perfil')}
+                                className={`item__link ${currentPath === '/perfil' ? 'item__link-ativo' : ''}`}
                             >
                                 <img
-                                    src={currentPath === '/codeconnect/perfil' ? AccountAtivo : Account}
+                                    src={currentPath === '/perfil' ? AccountAtivo : Account}
                                     alt='Perfil'
                                 />
                                 <span>Perfil</span>
@@ -81,11 +81,11 @@ export default function Sidebar() {
                         {/* Sobre nós */}
                         <li>
                             <a
-                                onClick={() => navigate('/codeconnect/sobre-nos')}
-                                className={`item__link ${currentPath === '/codeconnect/Sobre_nos' ? 'item__link-ativo' : ''}`}
+                                onClick={() => navigate('/sobre-nos')}
+                                className={`item__link ${currentPath === '/Sobre_nos' ? 'item__link-ativo' : ''}`}
                             >
                                 <img
-                                    src={currentPath === '/codeconnect/Sobre-nos' ? InfoAtivo : Info}
+                                    src={currentPath === '/Sobre-nos' ? InfoAtivo : Info}
                                     alt='Sobrenós'
                                 />
                                 <span>Sobre nós</span>

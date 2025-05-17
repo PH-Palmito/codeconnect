@@ -65,7 +65,7 @@ useEffect(() => {
   }
 
   return (
-    <Link to={`/codeconnect/detalhes/${id}`} className="card__link">
+    <Link to={`/detalhes/${id}`} className="card__link">
       <article className="card">
         <div className="card__imagem">
           {imagemUrl ? <img src={imagemUrl} alt="imagem do post" /> : <p>Imagem não disponível</p>}

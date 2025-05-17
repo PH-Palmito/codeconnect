@@ -9,8 +9,11 @@ import './styles.css';
 
 export default function Feed() {
   const [dados, setDados] = useState([]);
+  const [termoPesquisa, setTermoPesquisa] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 6;
+  
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -40,15 +43,21 @@ export default function Feed() {
     fetchPosts();
   }, []);
 
-  const totalPages = Math.ceil(dados.length / postsPerPage);
+  // FILTRAGEM pelo termo de pesquisa
+  const dadosFiltrados = dados.filter((item) =>
+    item.title.toLowerCase().includes(termoPesquisa.toLowerCase()) ||
+    item.content.toLowerCase().includes(termoPesquisa.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(dadosFiltrados.length / postsPerPage);
   const startIndex = (currentPage - 1) * postsPerPage;
   const endIndex = startIndex + postsPerPage;
-  const dadosVisiveis = dados.slice(startIndex, endIndex);
+  const dadosVisiveis = dadosFiltrados.slice(startIndex, endIndex);
 
   function irParaPagina(pagina) {
     if (pagina >= 1 && pagina <= totalPages) {
       setCurrentPage(pagina);
-      window.scrollTo({ top: 0, behavior: 'smooth' }); // rolar pro topo da página
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
@@ -56,11 +65,11 @@ export default function Feed() {
     <div className='container'>
       <Sidebar />
       <div>
-        <BarraDePesquisa />
+        <BarraDePesquisa onPesquisar={setTermoPesquisa} />
         <Filtro />
         <Ordenacao />
         <ul className='lista-cards'>
-          {dadosVisiveis.map((item, index) => (
+          {dadosVisiveis.map((item) => (
             <li key={item.id}>
               <Card
                 id={item.id}
@@ -80,13 +89,9 @@ export default function Feed() {
         </ul>
 
         <div className="paginacao">
-          <button
-            onClick={() => irParaPagina(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
+          <button onClick={() => irParaPagina(currentPage - 1)} disabled={currentPage === 1}>
             Anterior
           </button>
-
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i}
@@ -96,11 +101,7 @@ export default function Feed() {
               {i + 1}
             </button>
           ))}
-
-          <button
-            onClick={() => irParaPagina(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
+          <button onClick={() => irParaPagina(currentPage + 1)} disabled={currentPage === totalPages}>
             Próxima
           </button>
         </div>

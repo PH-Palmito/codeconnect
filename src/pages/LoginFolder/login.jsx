@@ -21,13 +21,13 @@ export default function PaginaDeLogin() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const navigate = useNavigate();  // <-- useNavigate() aqui
+  const navigate = useNavigate(); 
   const { login } = useAuth();
  const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    await login(email, senha); // ← login com Supabase
-    navigate("/codeconnect/"); // ← redireciona se der certo
+    await login(email, senha);
+    navigate("/"); //
   } catch (error) {
     alert("Erro ao fazer login: " + error.message);
   }
@@ -78,7 +78,7 @@ export default function PaginaDeLogin() {
               <ItemRedesSociais link="https://www.google.com" nome="Google" />
             </ul>
             <Texto classe="container-links__texto">Ainda não tem conta?</Texto>
-            <Link to="/codeconnect/cadastro" className="container-links__link">
+            <Link to="/cadastro" className="container-links__link">
   Crie seu cadastro!<ClipboardText size={22}
   weight="duotone" style={{ marginLeft: '6px', position: 'relative', top: '5px' }}/>
 </Link>

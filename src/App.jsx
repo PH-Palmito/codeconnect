@@ -27,15 +27,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/codeconnect/" element={<Feed />} />
-        <Route path="/codeconnect/login" element={<Login />} />
-        <Route path="/codeconnect/publish" element={<Publish />} />
-        <Route path="/codeconnect/cadastro" element={<Cadastro />} />
-        <Route path="/codeconnect/sobre-nos" element={<SobreNos />} />
-        <Route path="/codeconnect/detalhes/:id" element={<Detalhes />} />
+        <Route path="/" element={<Feed />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/publish" element={<Publish />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/sobre-nos" element={<SobreNos />} />
+        <Route path="/detalhes/:id" element={<Detalhes />} />
 
         <Route
-          path="/codeconnect/perfil"
+          path="/perfil"
           element={
             <RotaPrivada>
               <PaginaPerfil />
