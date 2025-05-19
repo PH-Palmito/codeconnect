@@ -35,11 +35,11 @@ O **CodeConnect** simula um blog de tecnologia, com cards de notícias sobre o u
 
 ## 📷 Screenshot
 
-![image](https://github.com/user-attachments/assets/bdfc96b9-6858-4381-9b47-ebd0a1b4a8c6)
-
-![image](https://github.com/user-attachments/assets/86f6c7f8-8c55-4a6e-a7a2-f7cdc8563066)
+![image](https://github.com/user-attachments/assets/bdfc96b9-6858-4381-9b47-ebd0a1b4a8c6)![image](https://github.com/user-attachments/assets/86f6c7f8-8c55-4a6e-a7a2-f7cdc8563066)
 
  
+
+
 
 
 ---
@@ -50,7 +50,7 @@ O **CodeConnect** simula um blog de tecnologia, com cards de notícias sobre o u
 - Utilizar JSX
 - Manipular props
 - Estrutura de pastas em projetos React
-- Deploy de aplicação React no GitHub Pages
+- Deploy de aplicação React no GitHub Pages e vercel
 
 
 
