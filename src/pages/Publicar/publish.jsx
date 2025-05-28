@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import './publish.css';
 import Sidebar from '../../componentes/sidebar';
+import Mensagem from '../../componentes/mensagem/mensagem';
 import { NotePencil, PencilSimple, Tag, Trash, UploadSimple } from '@phosphor-icons/react';
 import { supabase } from '../../lib/supabaseClient';
 import placeholderImage from '../../assets/imagens/card_code_editor.png';
-
 
 export default function Publish() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -12,7 +12,15 @@ export default function Publish() {
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('');
   const [codigo, setCodigo] = useState('');
+  const [isPublishing, setIsPublishing] = useState(false);
   const fileInputRef = useRef(null);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const showMessage = (setter, message, duration = 3000) => {
+    setter(message);
+    setTimeout(() => setter(''), duration);
+  };
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -27,9 +35,12 @@ export default function Publish() {
   };
 
   const handlePublicar = async () => {
+    if (isPublishing) return;
+    setIsPublishing(true);
+
     try {
       if (!nome.trim() || !descricao.trim() || !categoria.trim() || !imagePreview) {
-        alert('Por favor, preencha todos os campos antes de publicar.');
+        showMessage(setErrorMessage, 'Por favor, preencha todos os campos antes de publicar.');
         return;
       }
 
@@ -73,7 +84,7 @@ export default function Publish() {
 
       if (insertError) throw insertError;
 
-      alert('Post publicado com sucesso!');
+      showMessage(setSuccessMessage, 'Post publicado com sucesso!');
       setNome('');
       setDescricao('');
       setCategoria('');
@@ -81,7 +92,9 @@ export default function Publish() {
       setImagePreview(null);
     } catch (error) {
       console.error('Erro ao publicar:', error.message);
-      alert('Erro ao publicar post.');
+      showMessage(setErrorMessage, 'Erro ao publicar post.');
+    } finally {
+      setIsPublishing(false);
     }
   };
 
@@ -98,7 +111,8 @@ export default function Publish() {
               className="main-imagem"
             />
           </div>
-
+          <Mensagem tipo="sucesso" texto={successMessage} />
+          <Mensagem tipo="erro" texto={errorMessage} />
           <button className="button-upload" onClick={handleUploadClick}>
             Carregar imagem
             <UploadSimple
@@ -183,8 +197,13 @@ export default function Publish() {
                 <Trash size={24} weight="duotone" style={{ marginLeft: '8px', top: '4px' }} />
               </button>
 
-              <button type="button" className="botao-publicar" onClick={handlePublicar}>
-                Publicar
+              <button
+                type="button"
+                className="botao-publicar"
+                onClick={handlePublicar}
+                disabled={isPublishing}
+              >
+                {isPublishing ? 'Publicando...' : 'Publicar'}
                 <UploadSimple size={20} weight="bold" style={{ marginLeft: '8px', top: '4px' }} />
               </button>
             </div>
