@@ -3,6 +3,8 @@ import './publish.css';
 import Sidebar from '../../componentes/sidebar';
 import { NotePencil, PencilSimple, Tag, Trash, UploadSimple } from '@phosphor-icons/react';
 import { supabase } from '../../lib/supabaseClient';
+import placeholderImage from '../../assets/imagens/card_code_editor.png';
+
 
 export default function Publish() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -91,7 +93,7 @@ export default function Publish() {
         <div className="container-upload-imagem">
           <div className="container-imagem">
             <img
-              src={imagePreview || "src/assets/imagens/card_code_editor.png"}
+              src={imagePreview || placeholderImage}
               alt="preview"
               className="main-imagem"
             />
